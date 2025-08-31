@@ -1,0 +1,24 @@
+{
+  "name": "forkify",
+  "version": "1.0.0",
+  "description": "Recipe application",
+  "homepage": "https://github.com/AbdalrahmanEmara/Forkify#readme",
+  "bugs": {
+    "url": "https://github.com/AbdalrahmanEmara/Forkify/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbdalrahmanEmara/Forkify.git"
+  },
+  "license": "ISC",
+  "author": "Abdelrahman Emara",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.15.4",
+    "parcel": "^2.15.4",
+    "sass": "^1.91.0"
+  }
+}
