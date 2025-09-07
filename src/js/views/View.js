@@ -24,7 +24,6 @@ export default class {
         </svg>
       </div>
     `;
-
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   };
