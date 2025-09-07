@@ -6,9 +6,11 @@ class ResultsView extends View {
   _message = '';
 
   _generateMarkup() {
+    console.log(this._data);
     return `
-      ${this._data.map(rec => {
-        return `
+      ${this._data
+        .map(rec => {
+          return `
           <li class="preview">
             <a class="preview__link" href="#${rec.id}">
               <figure class="preview__fig">
@@ -21,8 +23,9 @@ class ResultsView extends View {
             </a>
           </li>        
         `;
-      }).join()}
-    `
+        })
+        .join()}
+    `; 
   }
 }
 
