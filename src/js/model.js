@@ -10,23 +10,29 @@ export const state = {
     page: 1,
     resultsPerPage: RES_PER_PAGE,
   },
+  bookmarks: [],
 };
 
 export const loadRecipe = async function (id) {
   try {
-    const data = await getJSON(`${API_URL}/${id}`);
+    if (state.bookmarks.some(bookmark => bookmark.id === id)) {
+      state.recipe = state.bookmarks.find(rec => rec.id === id);
+    } else {
+      const data = await getJSON(`${API_URL}/${id}`);
 
-    const { recipe } = data.data;
-    state.recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      image: recipe.image_url,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      ingredients: recipe.ingredients,
-      cookingTime: recipe.cooking_time,
-      servings: recipe.servings,
-    };
+      const { recipe } = data.data;
+      state.recipe = {
+        id: recipe.id,
+        title: recipe.title,
+        image: recipe.image_url,
+        publisher: recipe.publisher,
+        sourceUrl: recipe.source_url,
+        ingredients: recipe.ingredients,
+        cookingTime: recipe.cooking_time,
+        servings: recipe.servings,
+        // bookmarked: false,
+      };
+    }
   } catch (err) {
     console.error(`${err} 🔥🔥`);
     throw err;
@@ -48,6 +54,7 @@ export const loadSearchResults = async function (query) {
     });
 
     console.log(data);
+    state.search.page = 1;
   } catch (err) {
     console.error(`${err} 🔥🔥`);
     throw err;
@@ -68,4 +75,23 @@ export const updateServings = function (newServings) {
   });
 
   this.state.recipe.servings = newServings;
+};
+
+export const addBookmark = function (recipe) {
+  console.log(state.bookmarks);
+  // Add bookmark
+  state.bookmarks.push(recipe);
+
+  // Mark current recipe as bookmark
+  if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+};
+
+export const deleteBookmark = function (id) {
+  console.log(state.bookmarks);
+  // Delete bookmark
+  const index = state.bookmarks.findIndex(rec => rec.id === id);
+  state.bookmarks.splice(index, 1);
+
+  // Mark current recipe as Not bookmark
+  if (id === state.recipe.id) state.recipe.bookmarked = false;
 };
