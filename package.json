@@ -2,6 +2,7 @@
   "name": "forkify",
   "version": "1.0.0",
   "description": "Recipe application",
+  "default": "index.html",
   "homepage": "https://github.com/AbdalrahmanEmara/Forkify#readme",
   "bugs": {
     "url": "https://github.com/AbdalrahmanEmara/Forkify/issues"
@@ -14,7 +15,7 @@
   "author": "Abdelrahman Emara",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.15.4",
